@@ -13,7 +13,9 @@ using namespace std;
 int main()
 {
 	Student *students;
+	Course course_list[100];
 	int num_students = 0;
+	int different_courses = 0;
 	int enrollment_size = 5;
 	students = new Student[enrollment_size];
 	ifstream student_file;
@@ -43,8 +45,24 @@ int main()
 	{
 		int temp_ID;
 		int student_ID;
+		bool exists = false;
 		Course course_temp;
 		cin >> course_temp;
+		if (different_courses == 0)
+		{
+			course_list[0] = course_temp;
+			different_courses++;
+		}
+		for (int m = 0; m < different_courses; m++)
+		{
+			if (course_list[m] == course_temp)
+				exists = true;
+		}
+		if (exists == false)
+		{
+			course_list[different_courses] = course_temp;
+			different_courses++;
+		}
 		cin >> temp_ID;
 		for (int i = 0; i < num_students; i++)
 		{
@@ -73,4 +91,3 @@ int main()
 	enrolled_students.close();
     return 0;
 }
-
