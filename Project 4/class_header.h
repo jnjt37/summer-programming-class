@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <iomanip>
+using namespace std;
 struct Course
 {
 	string department;
@@ -72,11 +73,11 @@ public:
 	void set_first_name(string first) {first_name = first;};
 	void set_last_name(string last) { last_name = last; };
 	//additional functions
-	int add_course(const Course& a, int num_courses);
-	bool remove_course(const Course& a, int num_courses);
+	int add_course(const Course& a);
+	bool remove_course(const Course& a);
 	bool is_enrolled(const Course& aCourse) const;
 	bool read_data(istream& in);
-	bool write_data(ostream& out);
+	void write_data(const Student a);
 	double tuition_due() const;
 	friend istream& operator >> (istream& in, Student& data);
 	friend ostream& operator << (ostream& out, const Student& data);
@@ -102,7 +103,7 @@ ostream& operator << (ostream& out, const Course& data)
 	return out;
 }
 
-int Student::add_course(const Course& a, int num_courses)
+int Student::add_course(const Course& a)
 {
 	if (p_courses=nullptr)
 		p_courses = new Course[max_courses];//here we are assuming our drop out rate is very high
@@ -123,27 +124,19 @@ int Student::add_course(const Course& a, int num_courses)
 	num_courses++;
 	return num_courses;
 }
-bool Student::remove_course(const Course& a, int num_courses)
+bool Student::remove_course(const Course& a)
 {}
 bool Student::is_enrolled(const Course& aCourse) const
 {}
 bool Student::read_data(istream& in)
+{}
+void Student::write_data(const Student a)
 {
-	in >> ID >> first_name >> last_name >> num_courses;
-	for (int i = 0; i < num_courses; i++)
+	for (int m = 0; m < num_courses; m++)
 	{
-		add_course
+		cout << p_courses[m]<<endl;
 	}
-	if (first_name.isdigit() || last_name.isdigit())
-		return false;
-	else
-		return true;
-
-}
-bool Student::write_data(ostream& out)
-{
-	out << ID << " " << first_name << " " << last_name << " " << num_courses;
-
+	return;
 }
 double Student::tuition_due() const
 {
