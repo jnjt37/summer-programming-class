@@ -15,7 +15,7 @@ class Student
 {
 private:
 	string first_name, last_name;		
-	int ID,num_courses=0;
+	int ID,num_courses=0, max_courses = 3;;
 	Course *p_courses;
 public:
 	//constructors, destructors, and assignment operator
@@ -25,6 +25,8 @@ public:
 		string last_name = "";
 		int ID = 0;
 		int num_courses = 0;
+		max_courses = 3;
+		p_courses = nullptr;
 	}
 	Student(const Student &student_copy)
 	{
@@ -32,6 +34,7 @@ public:
 		last_name = student_copy.last_name;
 		ID = student_copy.ID;
 		num_courses = student_copy.num_courses;
+		max_courses = student_copy.max_courses;
 		delete[] p_courses;
 		p_courses = new Course[num_courses];
 		for (int a = 0; a < num_courses; a++)
@@ -50,6 +53,7 @@ public:
 		last_name = rhs.last_name;
 		ID = rhs.ID;
 		num_courses = rhs.num_courses;
+		max_courses = rhs.max_courses;
 		delete[] p_courses;
 		p_courses = new Course[num_courses];
 		for (int a = 0; a < num_courses; a++)
@@ -100,13 +104,13 @@ ostream& operator << (ostream& out, const Course& data)
 
 int Student::add_course(const Course& a, int num_courses)
 {
-	int courses = 3;
-	p_courses = new Course[courses];//here we are assuming our drop out rate is very high
-	if (num_courses == courses)
+	if (p_courses=nullptr)
+		p_courses = new Course[max_courses];//here we are assuming our drop out rate is very high
+	if (num_courses >= max_courses)
 	{
 		Course *r;
-		courses = courses * 2 + 1;
-		r = new Course[courses];
+		num_courses = num_courses * 2 + 1;
+		r = new Course[num_courses];
 		for (int j = 0; j < num_courses; j++)
 		{
 			r[j] = p_courses[j];
@@ -119,7 +123,7 @@ int Student::add_course(const Course& a, int num_courses)
 	num_courses++;
 	return num_courses;
 }
-bool Student::remove_course(const Course& a)
+bool Student::remove_course(const Course& a, int num_courses)
 {}
 bool Student::is_enrolled(const Course& aCourse) const
 {}
