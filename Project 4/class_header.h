@@ -77,7 +77,7 @@ public:
 	bool remove_course(const Course& a);
 	bool is_enrolled(const Course& aCourse) const;
 	bool read_data(istream& in);
-	void write_data(const Student a);
+	void write_data();
 	double tuition_due() const;
 	friend istream& operator >> (istream& in, Student& data);
 	friend ostream& operator << (ostream& out, const Student& data);
@@ -130,7 +130,7 @@ bool Student::is_enrolled(const Course& aCourse) const
 {}
 bool Student::read_data(istream& in)
 {}
-void Student::write_data(const Student a)
+void Student::write_data()
 {
 	for (int m = 0; m < num_courses; m++)
 	{
@@ -143,14 +143,18 @@ double Student::tuition_due() const
 	float total=0;
 	float grand_total = 10;//library fee
 	float pastry_fund = 0;
-	total += 476 * a.credit_hours;
-	total += 0.75 * a.credit_hours;
-	if (a.department == "CS" || a.department == "IT" || a.department == "ECE" || a.department == "CE" || a.department == "ME")
-		total += 15 * a.credit_hours;//lab expenses
+	for (int l = 0; l < num_courses; l++)
+	{
+		total += 476 * p_courses[l].credit_hours;
+		total += 0.75 * p_courses[l].credit_hours;
+		if (p_courses[l].department == "CS" || p_courses[l].department == "IT" || p_courses[l].department == "ECE" || p_courses[l].department == "CE" || p_courses[l].department == "ME")
+			total += 15 * p_courses[l].credit_hours;//lab expenses
+	}
+	
 	grand_total += total;
 	pastry_fund = grand_total*0.0025;
 	grand_total += pastry_fund;
-	return total;
+	return grand_total;
 }
 
 #endif

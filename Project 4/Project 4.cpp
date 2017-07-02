@@ -63,10 +63,7 @@ int main()
 		cout << students[k];
 		int temp_num_courses=0;
 		temp_num_courses = students[k].get_num_courses();
-		for (int l = 0; l < temp_num_courses; l++)
-		{
-			cout<<students[k].write_data(students[k])<<endl;
-		}
+		students[k].write_data();
 		cout<<"$"<<fixed<<setprecision(2)<<students[k].tuition_due()<<endl;
 	}
 	student_schedules.close();
