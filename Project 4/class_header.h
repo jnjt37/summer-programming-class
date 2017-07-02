@@ -5,7 +5,12 @@
 #include <fstream>
 #include <string>
 #include <iomanip>
-
+struct Course
+{
+	string department;
+	int number;
+	int credit_hours;
+};
 class Student
 {
 private:
@@ -13,37 +18,64 @@ private:
 	int ID,num_courses=0;
 	Course *p_courses;
 public:
-	Student(string first_name = "", string last_name = "", int ID = 0, int num_courses=0);
-	Student(const Student &student_copy);
-	~Student();
-	const Student& operator = (const Student& rhs)
+	//constructors, destructors, and assignment operator
+	Student()
+	{
+		string first_name = "";
+		string last_name = "";
+		int ID = 0;
+		int num_courses = 0;
+	}
+	Student(const Student &student_copy)
+	{
+		first_name = student_copy.first_name;
+		last_name = student_copy.last_name;
+		ID = student_copy.ID;
+		num_courses = student_copy.num_courses;
+		delete[] p_courses;
+		p_courses = new Course[num_courses];
+		for (int a = 0; a < num_courses; a++)
+		{
+			p_courses[a] = student_copy.p_courses[a];
+		}
+	}
+	~Student()
+	{
+		delete[] p_courses;
+		p_courses = nullptr;
+	}
+	Student& operator = (const Student& rhs)
 	{
 		first_name = rhs.first_name;
 		last_name = rhs.last_name;
 		ID = rhs.ID;
+		num_courses = rhs.num_courses;
+		delete[] p_courses;
+		p_courses = new Course[num_courses];
+		for (int a = 0; a < num_courses; a++)
+		{
+			p_courses[a] = rhs.p_courses[a];
+		}
 		return *this;
 	}
+	//getters
 	int get_ID() const { return ID; };
 	int get_num_courses() const { return num_courses; };
 	string get_first_name() const { return first_name; };
 	string get_last_name() const { return last_name; };
+	//setters
 	void set_ID(int id) { ID = id; };
 	void set_first_name(string first) {first_name = first;};
 	void set_last_name(string last) { last_name = last; };
+	//additional functions
 	int add_course(const Course& a, int num_courses);
-	bool remove_course(const Course&);
+	bool remove_course(const Course& a, int num_courses);
 	bool is_enrolled(const Course& aCourse) const;
 	bool read_data(istream& in);
 	bool write_data(ostream& out);
 	double tuition_due() const;
 	friend istream& operator >> (istream& in, Student& data);
 	friend ostream& operator << (ostream& out, const Student& data);
-};
-struct Course
-{
-	string department;
-	int number;
-	int credit_hours;
 };
 istream& operator >> (istream& in, Student& data)
 {
