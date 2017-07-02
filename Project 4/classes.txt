@@ -1,0 +1,93 @@
+IT 334	1
+	551526	Kierra	Robles
+	664285	Talia	Clarke
+	532356	Trenton	Rogers
+
+ENGL 135	3
+	551526	Kierra	Robles
+	687251	Micheal	Hodges
+	901480	Owen	Christensen
+	443462	Brayden	Barton
+	581078	Alice	Roberts
+	711570	Duncan	Stevens
+	298455	Carly	Mendoza
+
+IT 306	3
+	551526	Kierra	Robles
+	597393	Stephen	Guerrero
+	581078	Alice	Roberts
+	754841	Amelia	Webb
+	298455	Carly	Mendoza
+	532356	Trenton	Rogers
+
+SOC 166	3
+	551526	Kierra	Robles
+	901480	Owen	Christensen
+	443462	Brayden	Barton
+	711570	Duncan	Stevens
+	109707	Kelvin	Dominguez
+
+MATH 270	3
+	551526	Kierra	Robles
+	711570	Duncan	Stevens
+	395568	Marisa	Steele
+	664285	Talia	Clarke
+
+POLS 101	3
+	551526	Kierra	Robles
+	687251	Micheal	Hodges
+	145937	Sydney	Coleman
+	395568	Marisa	Steele
+	298455	Carly	Mendoza
+	664285	Talia	Clarke
+
+HIST 368	3
+	687251	Micheal	Hodges
+	581078	Alice	Roberts
+
+IT 146	3
+	687251	Micheal	Hodges
+	754841	Amelia	Webb
+	711570	Duncan	Stevens
+	109707	Kelvin	Dominguez
+	395568	Marisa	Steele
+
+MUS 139	3
+	901480	Owen	Christensen
+	597393	Stephen	Guerrero
+
+IT 361	3
+	443462	Brayden	Barton
+	597393	Stephen	Guerrero
+	581078	Alice	Roberts
+	754841	Amelia	Webb
+	145937	Sydney	Coleman
+	711570	Duncan	Stevens
+	298455	Carly	Mendoza
+	664285	Talia	Clarke
+
+ECE 104	4
+	443462	Brayden	Barton
+	597393	Stephen	Guerrero
+	526390	Clayton	Bryant
+	109707	Kelvin	Dominguez
+
+IT 179	3
+	597393	Stephen	Guerrero
+	532356	Trenton	Rogers
+
+POLS 256	3
+	597393	Stephen	Guerrero
+	526390	Clayton	Bryant
+	711570	Duncan	Stevens
+	664285	Talia	Clarke
+	532356	Trenton	Rogers
+
+CS 181	3
+	526390	Clayton	Bryant
+	145937	Sydney	Coleman
+	395568	Marisa	Steele
+
+IT 288	3
+	581078	Alice	Roberts
+
