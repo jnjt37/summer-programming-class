@@ -78,7 +78,7 @@ public:
 	bool is_enrolled(const Course& aCourse) const;
 	bool read_data(istream& in);
 	void write_data();
-	bool course_check(const Course a)
+	bool course_check(const Course a) 
 	{
 		for (int o = 0; o < num_courses; o++)
 		{
