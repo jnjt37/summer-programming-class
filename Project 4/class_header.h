@@ -105,7 +105,7 @@ void copy_course(Course& lhs, const Course& rhs)
 
 istream& operator >> (istream& in, Student& data)
 {
-	in >> data.ID >> data.first_name >> data.last_name;
+	in >> data.ID >> data.first_name >> data.last_name>>data.num_courses;
 	return in;
 }
 istream& operator >> (istream& in, Course& data)
@@ -115,7 +115,7 @@ istream& operator >> (istream& in, Course& data)
 }
 ostream& operator << (ostream& out, const Student& data)
 {
-	out << data.ID << data.first_name << data.last_name;
+	out << data.ID << data.first_name << data.last_name<<data.num_courses;
 	return out;
 }
 ostream& operator << (ostream& out, const Course& data)

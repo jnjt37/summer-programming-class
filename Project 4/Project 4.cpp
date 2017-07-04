@@ -35,7 +35,7 @@ int main()
 				delete[] students;
 			students = q;
 		}
-		cin >> students[num_students];
+		student_file >> students[num_students];
 		num_students++;
 	}
 	student_file.close();
@@ -47,7 +47,7 @@ int main()
 		int student_ID;
 		bool exists = false;
 		Course course_temp;
-		cin >> course_temp;
+		schedules_file >> course_temp;
 		if (different_courses == 0)
 		{
 			copy_course(course_list[0],course_temp);
@@ -63,7 +63,7 @@ int main()
 			copy_course(course_list[different_courses], course_temp);
 			different_courses++;
 		}
-		cin >> temp_ID;
+		schedules_file >> temp_ID;
 		for (int i = 0; i < num_students; i++)
 		{
 			student_ID = students[i].get_ID();
