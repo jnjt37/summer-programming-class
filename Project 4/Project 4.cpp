@@ -87,7 +87,12 @@ int main()
 	student_schedules.close();
 	ofstream enrolled_students;
 	enrolled_students.open("courseEnrollments.txt");
-	
+	for (int r = 0; r < 100; r++)
+	{
+		cout << course_list[r];
+		if (students[r].course_check(course_list[r]) == true)
+			cout << students[r];
+	}
 	enrolled_students.close();
     return 0;
 }

@@ -26,7 +26,7 @@ public:
 		string last_name = "";
 		int ID = 0;
 		int num_courses = 0;
-		max_courses = 3;
+		int max_courses = 3;
 		p_courses = nullptr;
 	}
 	Student(const Student &student_copy)
@@ -78,6 +78,15 @@ public:
 	bool is_enrolled(const Course& aCourse) const;
 	bool read_data(istream& in);
 	void write_data();
+	bool course_check(const Course a)
+	{
+		for (int o = 0; o < num_courses; o++)
+		{
+			if (a == p_courses[o])
+				return true;
+		}
+		return false;
+	}
 	double tuition_due() const;
 	friend istream& operator >> (istream& in, Student& data);
 	friend ostream& operator << (ostream& out, const Student& data);
@@ -102,7 +111,17 @@ ostream& operator << (ostream& out, const Course& data)
 	out << data.department << " " << data.number << " " << data.credit_hours << endl;
 	return out;
 }
-
+Course& Course :: operator = (const Course &course_a)
+{
+	department = course_a.department;
+	number = course_a.number;
+	credit_hours = course_a.credit_hours;
+	return *this;
+}
+bool operator == (const Course& lhs, const Course& rhs)
+{
+	return((lhs.department == rhs.department) && (lhs.number == rhs.number) && (lhs.credit_hours == rhs.credit_hours));
+}
 int Student::add_course(const Course& a)
 {
 	if (p_courses=nullptr)
