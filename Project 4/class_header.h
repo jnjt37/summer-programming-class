@@ -12,6 +12,10 @@ struct Course
 	int number;
 	int credit_hours;
 };
+bool operator == (const Course& lhs, const Course& rhs)
+{
+	return((lhs.department == rhs.department) && (lhs.number == rhs.number) && (lhs.credit_hours == rhs.credit_hours));
+}
 class Student
 {
 private:
@@ -74,9 +78,9 @@ public:
 	void set_last_name(string last) { last_name = last; };
 	//additional functions
 	int add_course(const Course& a);
-	bool remove_course(const Course& a);
-	bool is_enrolled(const Course& aCourse) const;
-	bool read_data(istream& in);
+	//bool remove_course(const Course& a);
+	//bool is_enrolled(const Course& aCourse) const;
+	//bool read_data(istream& in);
 	void write_data();
 	bool course_check(const Course a) 
 	{
@@ -98,10 +102,7 @@ void copy_course(Course& lhs, const Course& rhs)
 	lhs.credit_hours = rhs.credit_hours;
 	return;
 }
-bool operator == (const Course& lhs, const Course& rhs)
-{
-	return((lhs.department == rhs.department) && (lhs.number == rhs.number) && (lhs.credit_hours == rhs.credit_hours));
-}
+
 istream& operator >> (istream& in, Student& data)
 {
 	in >> data.ID >> data.first_name >> data.last_name;
@@ -143,12 +144,13 @@ int Student::add_course(const Course& a)
 	num_courses++;
 	return num_courses;
 }
-bool Student::remove_course(const Course& a)
+/*bool Student::remove_course(const Course& a)
 {}
 bool Student::is_enrolled(const Course& aCourse) const
 {}
 bool Student::read_data(istream& in)
 {}
+*/
 void Student::write_data()
 {
 	for (int m = 0; m < num_courses; m++)
