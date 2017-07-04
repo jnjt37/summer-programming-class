@@ -91,6 +91,17 @@ public:
 	friend istream& operator >> (istream& in, Student& data);
 	friend ostream& operator << (ostream& out, const Student& data);
 };
+void copy_course(Course& lhs, const Course& rhs)
+{
+	lhs.department = rhs.department;
+	lhs.number = rhs.number;
+	lhs.credit_hours = rhs.credit_hours;
+	return;
+}
+bool operator == (const Course& lhs, const Course& rhs)
+{
+	return((lhs.department == rhs.department) && (lhs.number == rhs.number) && (lhs.credit_hours == rhs.credit_hours));
+}
 istream& operator >> (istream& in, Student& data)
 {
 	in >> data.ID >> data.first_name >> data.last_name;
@@ -111,17 +122,6 @@ ostream& operator << (ostream& out, const Course& data)
 	out << data.department << " " << data.number << " " << data.credit_hours << endl;
 	return out;
 }
-Course& Course :: operator = (const Course &course_a)
-{
-	department = course_a.department;
-	number = course_a.number;
-	credit_hours = course_a.credit_hours;
-	return *this;
-}
-bool operator == (const Course& lhs, const Course& rhs)
-{
-	return((lhs.department == rhs.department) && (lhs.number == rhs.number) && (lhs.credit_hours == rhs.credit_hours));
-}
 int Student::add_course(const Course& a)
 {
 	if (p_courses=nullptr)
@@ -133,13 +133,13 @@ int Student::add_course(const Course& a)
 		r = new Course[num_courses];
 		for (int j = 0; j < num_courses; j++)
 		{
-			r[j] = p_courses[j];
+			copy_course(r[j],p_courses[j]);
 		}
 		if (p_courses != nullptr)
 			delete[] p_courses;
 		p_courses = r;
 	}
-	p_courses[num_courses] = a;
+	copy_course(p_courses[num_courses],a);
 	num_courses++;
 	return num_courses;
 }
@@ -169,11 +169,9 @@ double Student::tuition_due() const
 		if (p_courses[l].department == "CS" || p_courses[l].department == "IT" || p_courses[l].department == "ECE" || p_courses[l].department == "CE" || p_courses[l].department == "ME")
 			total += 15 * p_courses[l].credit_hours;//lab expenses
 	}
-	
 	grand_total += total;
 	pastry_fund = grand_total*0.0025;
 	grand_total += pastry_fund;
 	return grand_total;
 }
-
 #endif

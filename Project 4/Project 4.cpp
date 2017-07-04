@@ -50,7 +50,7 @@ int main()
 		cin >> course_temp;
 		if (different_courses == 0)
 		{
-			course_list[0] = course_temp;
+			copy_course(course_list[0],course_temp);
 			different_courses++;
 		}
 		for (int m = 0; m < different_courses; m++)
@@ -60,7 +60,7 @@ int main()
 		}
 		if (exists == false)
 		{
-			course_list[different_courses] = course_temp;
+			copy_course(course_list[different_courses], course_temp);
 			different_courses++;
 		}
 		cin >> temp_ID;
