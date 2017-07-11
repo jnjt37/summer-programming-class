@@ -1,0 +1,361 @@
+P
+Spicy Special
+More than just heat, a medley of peppers and spices
+m
+s
+*
+S
+Veggie Delight
+Hummus, sprouts, lettuce, tomato, cucumber on white or wheat
+chips
+P
+Super combo
+Everything but the kitchen sink
+l
+t
+no cheese
+no mushrooms
+extra sauce
+no onions
+*
+P
+Pepperoni
+The simple classic
+m
+k
+*
+P
+Pepperoni
+The simple classic
+m
+s
+*
+P
+Super combo
+Everything but the kitchen sink
+f
+s
+no mushrooms
+no cheese
+extra sauce
+double meat
+extra peppers
+*
+S
+Roast Beef
+Sliced beef, lettuce, tomato; a simple classic
+slaw
+P
+Super combo
+Everything but the kitchen sink
+f
+s
+extra peppers
+*
+P
+Super combo
+Everything but the kitchen sink
+m
+s
+*
+P
+Pepperoni
+The simple classic
+f
+s
+double meat
+extra sauce
+*
+S
+Rueben
+Corned beef, sauerkraut, and thousand island dressing on rye; a New York favorite
+fries
+P
+Vegetarian
+Only plant products; some assembly required
+l
+k
+no cheese
+no mushrooms
+*
+S
+Club
+Ham, turkey, and bacon on toast
+chips
+S
+BLT
+4 strips bacon, lettuce, tomato, with a touch of mayo on toast
+slaw
+S
+Club
+Ham, turkey, and bacon on toast
+slaw
+S
+Veggie Delight
+Hummus, sprouts, lettuce, tomato, cucumber on white or wheat
+fries
+S
+Veggie Delight
+Hummus, sprouts, lettuce, tomato, cucumber on white or wheat
+slaw
+P
+Combo
+Six toppings piled high
+s
+t
+extra sauce
+extra peppers
+*
+S
+Rueben
+Corned beef, sauerkraut, and thousand island dressing on rye; a New York favorite
+slaw
+P
+Cheese lovers
+Just cheese, but six kinds of it
+s
+s
+extra sauce
+no onions
+*
+P
+Spicy Special
+More than just heat, a medley of peppers and spices
+s
+s
+extra sauce
+no cheese
+no onions
+*
+P
+Cheese lovers
+Just cheese, but six kinds of it
+l
+t
+extra sauce
+no cheese
+no onions
+no mushrooms
+double meat
+*
+S
+Club
+Ham, turkey, and bacon on toast
+slaw
+S
+Rueben
+Corned beef, sauerkraut, and thousand island dressing on rye; a New York favorite
+fries
+P
+Super combo
+Everything but the kitchen sink
+l
+s
+no onions
+*
+P
+Combo
+Six toppings piled high
+s
+s
+no onions
+double meat
+*
+P
+Super combo
+Everything but the kitchen sink
+f
+t
+no cheese
+double meat
+extra sauce
+no onions
+*
+S
+Club
+Ham, turkey, and bacon on toast
+fries
+P
+Vegetarian
+Only plant products; some assembly required
+l
+k
+no mushrooms
+no onions
+extra peppers
+*
+P
+Cheese lovers
+Just cheese, but six kinds of it
+m
+t
+extra peppers
+double meat
+no cheese
+*
+P
+Vegetarian
+Only plant products; some assembly required
+m
+s
+double meat
+extra peppers
+no onions
+no mushrooms
+*
+P
+Combo
+Six toppings piled high
+l
+s
+no cheese
+extra sauce
+extra peppers
+*
+S
+Rueben
+Corned beef, sauerkraut, and thousand island dressing on rye; a New York favorite
+chips
+P
+Spicy Special
+More than just heat, a medley of peppers and spices
+s
+s
+double meat
+*
+S
+Club
+Ham, turkey, and bacon on toast
+chips
+P
+Cheese lovers
+Just cheese, but six kinds of it
+f
+t
+no cheese
+*
+P
+Super combo
+Everything but the kitchen sink
+s
+s
+extra peppers
+double meat
+extra sauce
+no mushrooms
+*
+P
+Vegetarian
+Only plant products; some assembly required
+f
+s
+*
+S
+Veggie Delight
+Hummus, sprouts, lettuce, tomato, cucumber on white or wheat
+slaw
+S
+Rueben
+Corned beef, sauerkraut, and thousand island dressing on rye; a New York favorite
+slaw
+P
+Super combo
+Everything but the kitchen sink
+l
+s
+extra peppers
+extra sauce
+no mushrooms
+no onions
+*
+P
+Super combo
+Everything but the kitchen sink
+f
+s
+double meat
+no cheese
+extra peppers
+*
+S
+Roast Beef
+Sliced beef, lettuce, tomato; a simple classic
+chips
+S
+BLT
+4 strips bacon, lettuce, tomato, with a touch of mayo on toast
+fries
+P
+Pepperoni
+The simple classic
+s
+k
+*
+P
+Cheese lovers
+Just cheese, but six kinds of it
+f
+t
+no mushrooms
+*
+S
+Veggie Delight
+Hummus, sprouts, lettuce, tomato, cucumber on white or wheat
+fries
+S
+Rueben
+Corned beef, sauerkraut, and thousand island dressing on rye; a New York favorite
+chips
+P
+Combo
+Six toppings piled high
+m
+k
+*
+P
+Combo
+Six toppings piled high
+m
+t
+extra peppers
+no mushrooms
+no onions
+no cheese
+*
+S
+Roast Beef
+Sliced beef, lettuce, tomato; a simple classic
+slaw
+S
+Club
+Ham, turkey, and bacon on toast
+chips
+S
+Veggie Delight
+Hummus, sprouts, lettuce, tomato, cucumber on white or wheat
+fries
+P
+Super combo
+Everything but the kitchen sink
+l
+s
+*
+S
+Roast Beef
+Sliced beef, lettuce, tomato; a simple classic
+chips
+P
+Cheese lovers
+Just cheese, but six kinds of it
+l
+s
+no cheese
+*
+P
+Cheese lovers
+Just cheese, but six kinds of it
+l
+k
+no mushrooms
+no onions
+*
