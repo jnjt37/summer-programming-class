@@ -15,16 +15,15 @@ using namespace std;
 int main()
 {
 	srand(time(NULL));
-	int pizzas = 0, sandwiches = 0, counter = 0, discountsGiven = 0;
+	int pizzas = 0, sandwiches = 0, counter = 0, discountsGiven = 0, orderNum = 0;
 	float totalSales = 0, discount = 0, netSales = 0, orderPrice = 0;
 	int luckyCustomer;
 	char itemType;
-	Pizza pizza;
-	Sandwich sandwich;
 	MenuItem *itemList[100];
 	for (int i = 0; i < 100; i++)
 		itemList[i] = nullptr;
 	ifstream orders;
+	ofstream orderCopy;
 	orders.open("program5data.txt");
 	luckyCustomer = rand() % 20;
 	while (orders >> itemType)
@@ -32,13 +31,19 @@ int main()
 		orders.ignore();
 		if (itemType == 'P')
 		{	
-
+			itemList[orderNum] = *Pizza();
+			itemList[orderNum].readData(orders);
+			itemList[orderNum].setPrice();
 			pizzas++;
 		}
 		if (itemType == 'S')
 		{
+			itemList[orderNum] = *Sandwich();
+			itemList[orderNum].readData(orders);
+			itemList[orderNum].setPrice();
 			sandwiches++;
 		}
+		orderNum++;
 		counter++;
 		if (counter > 19)
 		{
@@ -54,6 +59,12 @@ int main()
 	cout << "Discount amount: $" << fixed << setprecision(2) << discount << endl;
 	netSales = totalSales - discount;
 	cout << "Net sales: $" << fixed << setprecision(2) << netSales << endl;
+	orderCopy.open("orders.txt");
+	for (int k = 0; k < 100; k++)
+	{
+		if (itemList[k])
+	}
+	orderCopy.close();
 	system("pause");
 	return 0;
 }
