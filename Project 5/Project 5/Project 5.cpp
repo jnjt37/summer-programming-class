@@ -27,9 +27,10 @@ int main()
 	orders.open("program5data.txt");
 	//orderCopy.open("orders.txt");
 	luckyCustomer = rand() % 20;
-	while (orders >> itemType)
+	while (!orders.eof())
 	{
 		orders.ignore();
+		orders >> itemType;
 		if (itemType == 'P')
 		{	
 			itemList[orderNum] = new Pizza();
