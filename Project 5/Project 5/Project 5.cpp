@@ -19,9 +19,11 @@ int main()
 	float totalSales = 0, discount = 0, netSales = 0, orderPrice = 0;
 	int luckyCustomer;
 	char itemType;
+	Pizza pizza;
+	Sandwich sandwich;
 	MenuItem *itemList[100];
 	for (int i = 0; i < 100; i++)
-		item_list[i] = nullptr;
+		itemList[i] = nullptr;
 	ifstream orders;
 	orders.open("program5data.txt");
 	luckyCustomer = rand() % 20;
@@ -29,29 +31,12 @@ int main()
 	{
 		orders.ignore();
 		if (itemType == 'P')
-		{
-			Pizza pizza;
-			pizza.readData(orders);
-			orderPrice = pizza.getPrice();
-			totalSales += orderPrice;
-			if (luckyCustomer == counter)
-			{
-				discount += orderPrice*0.2;
-				discountsGiven++;
-			}
+		{	
+
 			pizzas++;
 		}
 		if (itemType == 'S')
 		{
-			Sandwich sandwich;
-			sandwich.readData(orders);
-			orderPrice = sandwich.getPrice();
-			totalSales += orderPrice;
-			if (luckyCustomer == counter)
-			{
-				discount += orderPrice*0.2;
-				discountsGiven++;
-			}
 			sandwiches++;
 		}
 		counter++;
@@ -71,6 +56,18 @@ int main()
 	cout << "Net sales: $" << fixed << setprecision(2) << netSales << endl;
 	system("pause");
 	return 0;
+}
+void Pizza::setPrice()
+{
+	switch (size)
+	{
+	case 's': price = 7; break;
+	case 'm': price = 8; break;
+	case 'l': price = 10; break;
+	case 'f': price = 12; break;
+	}
+	if (crust == 's')
+		price += 1;
 }
 void Pizza::readData(istream& orderDetails)
 {
@@ -99,10 +96,13 @@ void Pizza::writeData(ostream& orderWrite)
 	orderWrite << modification;
 	while (modification != "*" && tooManyMods <= 5)
 	{
-		getline(orderWrite, modification);
-		tooManyMods++;
+		
 	}
 	return;
+}
+void Sandwich::setPrice()
+{
+	price = 8;
 }
 void Sandwich::readData(istream& orderDetails)
 {
