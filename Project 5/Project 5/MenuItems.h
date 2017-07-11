@@ -13,6 +13,7 @@ public:
 	float getPrice() { return price; };
 	void setName(string s) { name = s; };
 	void setDescription(string d) { description = d; };
+	virtual void setPrice() = 0;
 	virtual void readData(istream& orderDetails) = 0;
 	virtual void writeData(ostream& orderWrite) = 0;
 	virtual string WhatAmI(char t) = 0;

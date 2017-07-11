@@ -25,22 +25,25 @@ int main()
 	ifstream orders;
 	ofstream orderCopy;
 	orders.open("program5data.txt");
+	//orderCopy.open("orders.txt");
 	luckyCustomer = rand() % 20;
 	while (orders >> itemType)
 	{
 		orders.ignore();
 		if (itemType == 'P')
 		{	
-			itemList[orderNum] = *Pizza();
-			itemList[orderNum].readData(orders);
-			itemList[orderNum].setPrice();
+			itemList[orderNum] = new Pizza();
+			itemList[orderNum]->readData(orders);
+			itemList[orderNum]->setPrice();
+			orderPrice = itemList[orderNum]->getPrice();
 			pizzas++;
 		}
 		if (itemType == 'S')
 		{
-			itemList[orderNum] = *Sandwich();
-			itemList[orderNum].readData(orders);
-			itemList[orderNum].setPrice();
+			itemList[orderNum] = new Sandwich();
+			itemList[orderNum]->readData(orders);
+			itemList[orderNum]->setPrice();
+			orderPrice = itemList[orderNum]->getPrice();
 			sandwiches++;
 		}
 		orderNum++;
@@ -51,6 +54,7 @@ int main()
 			luckyCustomer = rand() % 20;
 		}
 	}
+	//orderCopy.close();
 	orders.close();
 	cout << "Pizzas sold: " << pizzas << endl;
 	cout << "Sandwiches sold: " << sandwiches << endl;
@@ -59,12 +63,18 @@ int main()
 	cout << "Discount amount: $" << fixed << setprecision(2) << discount << endl;
 	netSales = totalSales - discount;
 	cout << "Net sales: $" << fixed << setprecision(2) << netSales << endl;
-	orderCopy.open("orders.txt");
+/*	
 	for (int k = 0; k < 100; k++)
 	{
-		if (itemList[k])
+		if (itemList[k]->WhatAmI(itemType) == "Pizza")
+			itemList[k]->writeData(orderCopy);
 	}
-	orderCopy.close();
+	for (int k = 0; k < 100; k++)
+	{
+		if (itemList[k]->WhatAmI(itemType) == "Sandwich")
+			itemList[k]->writeData(orderCopy);
+	}
+*/	
 	system("pause");
 	return 0;
 }
