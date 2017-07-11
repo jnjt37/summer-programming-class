@@ -16,7 +16,7 @@ int main()
 {
 	srand(time(NULL));
 	int pizzas = 0, sandwiches = 0, counter = 0, discountsGiven = 0, orderNum = 0;
-	float totalSales = 0, discount = 0, netSales = 0, orderPrice = 0;
+	float totalSales = 0, discount = 0, netSales = 0, orderPrice = 0, totalDiscounts = 0;
 	int luckyCustomer;
 	char itemType;
 	MenuItem *itemList[100];
@@ -47,6 +47,13 @@ int main()
 			orderPrice = itemList[orderNum]->getPrice();
 			sandwiches++;
 		}
+		totalSales += orderPrice;
+		if (counter == luckyCustomer)
+		{
+			discountsGiven++;
+			discount = orderPrice*.2;
+			totalDiscounts += discount;
+		}
 		orderNum++;
 		counter++;
 		if (counter > 19)
@@ -62,7 +69,7 @@ int main()
 	cout << "Total sales: $" << fixed << setprecision(2) << totalSales << endl;
 	cout << "Number of discounts given" << discountsGiven << endl;
 	cout << "Discount amount: $" << fixed << setprecision(2) << discount << endl;
-	netSales = totalSales - discount;
+	netSales = totalSales - totalDiscounts;
 	cout << "Net sales: $" << fixed << setprecision(2) << netSales << endl;
 /*	
 	for (int k = 0; k < 100; k++)
