@@ -31,7 +31,7 @@ public:
 		int ID = 0;
 		int num_courses = 0;
 		int max_courses = 3;
-		p_courses = nullptr;
+		p_courses = new Course[max_courses];
 	}
 	Student(const Student &student_copy)
 	{
@@ -40,7 +40,7 @@ public:
 		ID = student_copy.ID;
 		num_courses = student_copy.num_courses;
 		max_courses = student_copy.max_courses;
-		delete[] p_courses;
+		//delete[] p_courses;
 		p_courses = new Course[num_courses];
 		for (int a = 0; a < num_courses; a++)
 		{
@@ -49,8 +49,11 @@ public:
 	}
 	~Student()
 	{
-		delete[] p_courses;
-		p_courses = nullptr;
+		if (p_courses != nullptr)
+		{
+			delete[] p_courses;
+			p_courses = nullptr;
+		}
 	}
 	Student& operator = (const Student& rhs)
 	{
@@ -59,7 +62,8 @@ public:
 		ID = rhs.ID;
 		num_courses = rhs.num_courses;
 		max_courses = rhs.max_courses;
-		delete[] p_courses;
+		if(p_courses!=nullptr)
+			delete[] p_courses;
 		p_courses = new Course[num_courses];
 		for (int a = 0; a < num_courses; a++)
 		{
@@ -95,14 +99,6 @@ public:
 	friend istream& operator >> (istream& in, Student& data);
 	friend ostream& operator << (ostream& out, const Student& data);
 };
-void copy_course(Course& lhs, const Course& rhs)
-{
-	lhs.department = rhs.department;
-	lhs.number = rhs.number;
-	lhs.credit_hours = rhs.credit_hours;
-	return;
-}
-
 istream& operator >> (istream& in, Student& data)
 {
 	in >> data.ID >> data.first_name >> data.last_name>>data.num_courses;
@@ -125,7 +121,7 @@ ostream& operator << (ostream& out, const Course& data)
 }
 int Student::add_course(const Course& a)
 {
-	if (p_courses=nullptr)
+	if (p_courses==nullptr)
 		p_courses = new Course[max_courses];//here we are assuming our drop out rate is very high
 	if (num_courses >= max_courses)
 	{
@@ -134,17 +130,18 @@ int Student::add_course(const Course& a)
 		r = new Course[num_courses];
 		for (int j = 0; j < num_courses; j++)
 		{
-			copy_course(r[j],p_courses[j]);
+			r[j]=p_courses[j];
 		}
 		if (p_courses != nullptr)
 			delete[] p_courses;
 		p_courses = r;
 	}
-	copy_course(p_courses[num_courses],a);
+	p_courses[num_courses]=a;
 	num_courses++;
 	return num_courses;
 }
-/*bool Student::remove_course(const Course& a)
+/*
+bool Student::remove_course(const Course& a)
 {}
 bool Student::is_enrolled(const Course& aCourse) const
 {}

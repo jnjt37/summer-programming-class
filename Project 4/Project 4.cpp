@@ -47,10 +47,11 @@ int main()
 		int student_ID;
 		bool exists = false;
 		Course course_temp;
+		schedules_file >> temp_ID;
 		schedules_file >> course_temp;
 		if (different_courses == 0)
 		{
-			copy_course(course_list[0],course_temp);
+			course_list[0]=course_temp;
 			different_courses++;
 		}
 		for (int m = 0; m < different_courses; m++)
@@ -60,10 +61,9 @@ int main()
 		}
 		if (exists == false)
 		{
-			copy_course(course_list[different_courses], course_temp);
+			course_list[different_courses]=course_temp;
 			different_courses++;
 		}
-		schedules_file >> temp_ID;
 		for (int i = 0; i < num_students; i++)
 		{
 			student_ID = students[i].get_ID();
