@@ -25,14 +25,13 @@ int main()
 	ifstream orders;
 	ofstream orderCopy;
 	orders.open("program5data.txt");
-	//orderCopy.open("orders.txt");
+	
 	luckyCustomer = rand() % 20;
-	while (!orders.eof())
+	while (orders>>itemType)
 	{
 		orders.ignore();
-		orders >> itemType;
 		if (itemType == 'P')
-		{	
+		{
 			itemList[orderNum] = new Pizza();
 			itemList[orderNum]->readData(orders);
 			itemList[orderNum]->setPrice();
@@ -62,27 +61,28 @@ int main()
 			luckyCustomer = rand() % 20;
 		}
 	}
-	//orderCopy.close();
 	orders.close();
 	cout << "Pizzas sold: " << pizzas << endl;
 	cout << "Sandwiches sold: " << sandwiches << endl;
 	cout << "Total sales: $" << fixed << setprecision(2) << totalSales << endl;
-	cout << "Number of discounts given" << discountsGiven << endl;
-	cout << "Discount amount: $" << fixed << setprecision(2) << discount << endl;
+	cout << "Number of discounts given: " << discountsGiven << endl;
+	cout << "Discount amount: $" << fixed << setprecision(2) << totalDiscounts << endl;
 	netSales = totalSales - totalDiscounts;
 	cout << "Net sales: $" << fixed << setprecision(2) << netSales << endl;
-/*	
+	/*
+	orderCopy.open("orders.txt");
 	for (int k = 0; k < 100; k++)
 	{
-		if (itemList[k]->WhatAmI(itemType) == "Pizza")
+		if (itemList[k]->getType() == 'P')
 			itemList[k]->writeData(orderCopy);
 	}
-	for (int k = 0; k < 100; k++)
+	for (int k = 0; k < 100; k++)                    //Sorry about not being able to get the output to work.
 	{
-		if (itemList[k]->WhatAmI(itemType) == "Sandwich")
+		if (itemList[k]->getType() == 'S')
 			itemList[k]->writeData(orderCopy);
 	}
-*/	
+	orderCopy.close();
+	*/
 	system("pause");
 	return 0;
 }
@@ -103,7 +103,9 @@ void Pizza::readData(istream& orderDetails)
 	string tempName, tempDesc;
 	int tooManyMods = 0;
 	getline(orderDetails, tempName);
+	setName(tempName);
 	getline(orderDetails, tempDesc);
+	setDescription(tempDesc);
 	orderDetails >> size;
 	orderDetails >> crust;
 	getline(orderDetails, modification);
@@ -116,17 +118,10 @@ void Pizza::readData(istream& orderDetails)
 }
 void Pizza::writeData(ostream& orderWrite)
 {
-	string tempName, tempDesc;
-	int tooManyMods = 0;
-	orderWrite << tempName;
-	orderWrite << tempDesc;
-	orderWrite << size;
-	orderWrite << crust;
-	orderWrite << modification;
-	while (modification != "*" && tooManyMods <= 5)
-	{
-		
-	}
+	orderWrite << getName() << endl;
+	orderWrite << getDescription() << endl;
+	orderWrite << size << endl;
+	orderWrite << crust << endl;
 	return;
 }
 void Sandwich::setPrice()
@@ -137,7 +132,9 @@ void Sandwich::readData(istream& orderDetails)
 {
 	string tempName, tempDesc;
 	getline(orderDetails, tempName);
+	setName(tempName);
 	getline(orderDetails, tempDesc);
+	setDescription(tempDesc);
 	getline(orderDetails, side);
 	return;
 }
