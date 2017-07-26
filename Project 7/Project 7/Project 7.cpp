@@ -22,7 +22,6 @@ int main()
 	bool end_customer_list = false;
 	Register lanes[6];
 	List<Customer> arrivals[500];
-	List<Customer> departures[500];
 	Customer temp;
 
 	ifstream fin;
