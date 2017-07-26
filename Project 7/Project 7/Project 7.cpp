@@ -176,6 +176,18 @@ const List<T>& List<T>::operator=(const List<T>& rhs)
 	}
 	return *this;
 }
+
+template <class T>
+T& List<T>::operator [](int index)
+{
+	ListNode<T> *temp = front;
+	for (int i = 0; i < index; i++)
+	{
+		temp = temp->next;
+	}
+	return temp->data;
+}
+
 //List destructor
 template <class T>
 List<T>::~List()

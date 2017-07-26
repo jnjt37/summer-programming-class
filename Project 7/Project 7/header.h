@@ -31,6 +31,7 @@ public:
 	List(const List<T>& other);
 	~List();
 	const List<T>& operator = (const List<T>& rhs);
+	T& operator [] (int index);
 	void push_front(const T& item);
 	void push_back(const T& item);
 	void push_ordered(const T& item);
