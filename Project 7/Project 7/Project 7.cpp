@@ -91,8 +91,12 @@ int main()
 		if (customer_counter == num_customers - 1)
 			end_customer_list = true;
 	}
-	
-		
+	cout << "Steady State Condition:" << endl;
+	cout << "Number of customers served: " << num_customers << endl;
+	cout << "Longest line length: " << most_customers_in_line << endl;
+	cout << "Average lenth of time spent in line: " << endl;
+	cout << "Maximum length of time spent in line: " << endl;
+	cout << "Total time registers were idle: " << endl;
 	tick = 0;
 	end_customer_list = false;
 	num_customers = 0;
@@ -109,7 +113,12 @@ int main()
 		num_customers++;
 	}
 	fin.close();
-
+	cout << "Big Tickets Condition:" << endl;
+	cout << "Number of customers served: " << num_customers << endl;
+	cout << "Longest line length: " << most_customers_in_line << endl;
+	cout << "Average lenth of time spent in line: " << endl;
+	cout << "Maximum length of time spent in line: " << endl;
+	cout << "Total time registers were idle: " << endl;
 	
 	
 	ifstream fin;
@@ -123,6 +132,13 @@ int main()
 		num_customers++;
 	}
 	fin.close();
+	cout << "Big Crunch Condition:" << endl;
+	cout << "Number of customers served: " << num_customers << endl;
+	cout << "Longest line length: " << most_customers_in_line << endl;
+	cout << "Average lenth of time spent in line: " << endl;
+	cout << "Maximum length of time spent in line: " << endl;
+	cout << "Total time registers were idle: " << endl;
+
 	system("pause");
     return 0;
 }
