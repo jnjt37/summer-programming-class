@@ -16,7 +16,6 @@ int main()
 	fin.open("Program6Input.txt");
 	while (!fin.eof())
 	{
-		//fin.ignore();
 		fin >> tempNum;
 		if (tempNum % 2 == 0)
 		{
@@ -44,22 +43,27 @@ int main()
 	fin.close();
 	for (int i = 0; i < 4; i++)
 	{
+		cout << "List ["<<i<<"]:" << endl;
 		lists[i].traverse(cout);
 	}
+	system("pause");
 	return 0;
 }
+//ListNode copy constructor
 template <class T>
 ListNode<T>::ListNode(const T& item)
 {
 	data = item;
 	next = prev = nullptr;
 }
+//List default constructor
 template <class T>
 List<T>::List()
 {
 	front = back = nullptr;
 	count = 0;
 }
+//List copy constructor
 template <class T>
 List<T>::List(const List<T>& other)
 {
@@ -67,6 +71,7 @@ List<T>::List(const List<T>& other)
 	count = 0;
 	*this = other;
 }
+//overloaded = operator
 template <class T>
 const List<T>& List<T>::operator=(const List<T>& rhs)
 {
@@ -74,11 +79,12 @@ const List<T>& List<T>::operator=(const List<T>& rhs)
 	this->clear();
 	while (temp != nullptr)
 	{
-		this->push_back(temp->data);
-		temp = temp->next;
+		this->push_back(temp->data);// copies the item in list
+		temp = temp->next;//moves through list
 	}
 	return *this;
 }
+//List destructor
 template <class T>
 List<T>::~List()
 {
@@ -90,15 +96,16 @@ void List<T>::clear()
 	ListNode<T> *temp = new ListNode<T>();
 	while (is_empty() != true)
 	{
-		temp = front->next;
-		delete front;
-		front = temp;
+		temp = front->next;//looks at next item
+		delete front;//deletes first item
+		front = temp;//makes next item the first
 		if (front->next == nullptr)
-			break;
+			break;//leaves the loop once there are no more items
 	}
 	count = 0;
 	return;
 }
+//outputs the contents of the list
 template <class T>
 void List<T>::traverse(ostream& out) const
 {
@@ -115,12 +122,12 @@ void List<T>::push_front(const T& item)
 {
 	ListNode<T> *P= new ListNode<T>();
 	P->data = item;
-	if (is_empty())
+	if (is_empty())//checks for empty list case
 	{
 		front = P;
 		back = P;
 	}
-	else
+	else//assigns the new node to the front
 	{
 		P->next = front;
 		front->prev = P;
@@ -133,12 +140,12 @@ void List<T>::push_back(const T& item)
 {
 	ListNode<T> *P = new ListNode<T>();
 	P->data = item;
-	if (back==nullptr)
+	if (back==nullptr)//checks for empty list case
 	{
 		back = P;
 		front = P;
 	}
-	else
+	else//assigns the new node to the front
 	{
 		P->prev = back;
 		back->next = P;
@@ -152,19 +159,19 @@ void List<T>::push_ordered(const T& item)
 	ListNode<T> *P = new ListNode<T>();
 	P->data = item;
 	ListNode<T> *current = front;
-	if (item <= front->data)
+	if (!front || item <= front->data)//checks if the list is empty or if the item is the smallest value for the list
 	{
 		push_front(item);
 		return;
 	}
-	for (int i = 0; i < count; i++)
+	for (int i = 0; i < count; i++)//moves through the list
 	{
-		if (current == back)
+		if (current == back)//case for item being the largest in the list
 		{
 			push_back(item);
 			return;
 		}
-		if (current->next->data >= P->data)
+		if (current->next->data >= P->data)//case for any other point in the list
 		{
 			P->next = current->next;
 			P->prev = current;
@@ -179,15 +186,15 @@ void List<T>::push_ordered(const T& item)
 template <class T>
 T List<T>::pop_front()
 {
-	if (front == nullptr)
+	if (front == nullptr)//checks for empty list
 	{
-		throw ListException("Empty List");
+		throw ListException<T>("Empty List");
 	}
-	else if (size() == 1)
+	else if (size() == 1)//deals with the case where there is only one item
 	{
 		clear();
 	}
-	else
+	else//every other case
 	{
 		ListNode<T> *temp = front->next;
 		delete front;
@@ -196,6 +203,7 @@ T List<T>::pop_front()
 	count--;
 	return front->data;
 }
+//removes the back item
 template <class T>
 T List<T>::pop_back()
 {
@@ -205,11 +213,13 @@ T List<T>::pop_back()
 	count--;
 	return back->data;
 }
+//returns count
 template <class T>
 int List<T>::size()
 {
 	return count;
 }
+//checks the count and if the list is empty
 template <class T>
 bool List<T>::is_empty()
 {
