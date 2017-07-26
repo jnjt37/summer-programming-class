@@ -21,7 +21,7 @@ int main()
 	int longest_wait_time = 0;
 	bool end_customer_list = false;
 	Register lanes[6];
-	List<Customer> arrivals[500];
+	List<Customer> arrivals;
 	Customer temp;
 
 	ifstream fin;
@@ -31,7 +31,7 @@ int main()
 		cin >> temp.time_arrived;
 		cin >> temp.items;
 		temp.payment_time = rand() % 4;
-		arrivals[num_customers].push_back(temp);
+		arrivals.push_back(temp);
 		num_customers++;
 	}
 	fin.close();
@@ -65,11 +65,18 @@ int main()
 					}
 					for (int j = 2; j < 6; j++)
 					{
-						if (lanes[j].customers_in_line > lanes[j - 1].customers_in_line)
+						if (lanes[j].customers_in_line < lanes[j - 1].customers_in_line && lanes[1].customers_in_line > lanes[j].customers_in_line)
 						{
-							lanes[j - 1].lines.push_back(temp);
-							lanes[j - 1].customers_in_line++;
-							if (lanes[j - 1].customers_in_line > most_customers_in_line)
+							lanes[j].lines.push_back(temp);
+							lanes[j].customers_in_line++;
+							if (lanes[j].customers_in_line > most_customers_in_line)
+								most_customers_in_line++;
+						}
+						else
+						{
+							lanes[1].lines.push_back(temp);
+							lanes[1].customers_in_line++;
+							if (lanes[1].customers_in_line > most_customers_in_line)
 								most_customers_in_line++;
 						}
 					}
@@ -108,7 +115,7 @@ int main()
 		cin >> temp.time_arrived;
 		cin >> temp.items;
 		temp.payment_time = rand() % 4;
-		arrivals[num_customers].push_back(temp);
+		arrivals.push_back(temp);
 		num_customers++;
 	}
 	fin.close();
@@ -127,7 +134,7 @@ int main()
 		cin >> temp.time_arrived;
 		cin >> temp.items;
 		temp.payment_time = rand() % 4;
-		arrivals[num_customers].push_back(temp);
+		arrivals.push_back(temp);
 		num_customers++;
 	}
 	fin.close();
