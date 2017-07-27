@@ -37,6 +37,7 @@ public:
 	void push_ordered(const T& item);
 	T pop_front();
 	T pop_back();
+	T get_front();
 	void clear();
 	int size();
 	bool is_empty();
@@ -48,7 +49,7 @@ struct Customer
 	int time_arrived=0;
 	int time_checkout_started=0;
 	int time_completed=0;
-	int payment_time=0;
+	int payment_time=rand()%4;
 	int total_time=items+payment_time;
 };
 struct Register
@@ -56,6 +57,5 @@ struct Register
 	List<Customer> lines;
 	bool busy = false;
 	Customer checking_out;
-	int customers_in_line = 0;
 };
 #endif // !HEADER_H

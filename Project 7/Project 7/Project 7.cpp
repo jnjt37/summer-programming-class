@@ -19,6 +19,7 @@ int main()
 	int customer_counter = 0;
 	int most_customers_in_line = 0;
 	int longest_wait_time = 0;
+	int total_idle_time = 0;
 	bool end_customer_list = false;
 	Register lanes[6];
 	List<Customer> arrivals;
@@ -42,12 +43,11 @@ int main()
 			temp = arrivals[i];
 			if (temp.time_arrived == tick)
 			{
-				if (temp.items <= 10 && lanes[0].customers_in_line <= 5)
+				if (temp.items <= 10 && lanes[0].lines.size() <= 5)
 				{
 					lanes[0].lines.push_front(temp);
 					lanes[0].busy = true;
-					lanes[0].customers_in_line++;
-					if (lanes[0].customers_in_line > most_customers_in_line)
+					if (lanes[0].lines.size() > most_customers_in_line)
 						most_customers_in_line++;
 				}
 				else
@@ -58,25 +58,116 @@ int main()
 						{
 							lanes[j].lines.push_front(temp);
 							lanes[j].busy = true;
-							lanes[j].customers_in_line++;
-							if (lanes[j].customers_in_line > most_customers_in_line)
+							if (lanes[j].lines.size() > most_customers_in_line)
 								most_customers_in_line++;
 						}
 					}
 					for (int j = 2; j < 6; j++)
 					{
-						if (lanes[j].customers_in_line < lanes[j - 1].customers_in_line && lanes[1].customers_in_line > lanes[j].customers_in_line)
+						if (lanes[j].lines.size() < lanes[j - 1].lines.size() && lanes[1].lines.size() > lanes[j].lines.size())
 						{
 							lanes[j].lines.push_back(temp);
-							lanes[j].customers_in_line++;
-							if (lanes[j].customers_in_line > most_customers_in_line)
+							if (lanes[j].lines.size() > most_customers_in_line)
 								most_customers_in_line++;
 						}
 						else
 						{
 							lanes[1].lines.push_back(temp);
-							lanes[1].customers_in_line++;
-							if (lanes[1].customers_in_line > most_customers_in_line)
+							if (lanes[1].lines.size() > most_customers_in_line)
+								most_customers_in_line++;
+						}
+					}
+				}
+			}
+			customer_counter++;
+		}
+		for (int i = 0; i < 6; i++)
+		{
+		
+			if (lanes[i].busy == true)
+			{
+				lanes[i].checking_out = lanes[i].lines.get_front();
+				lanes[i].checking_out.total_time = lanes[i].checking_out.total_time - 3;
+				lanes[i].checking_out.time_completed++;
+				if (lanes[i].checking_out.total_time <= 0)
+					lanes[i].lines.pop_front();
+			}
+			if (lanes[i].checking_out.time_completed > longest_wait_time)
+			{
+				longest_wait_time++;
+			}
+		}
+		for (int i = 0; i < 6; i++)
+		{
+			if (lanes[i].busy == false)
+				total_idle_time++;
+		}
+		tick++;
+		if (customer_counter == num_customers - 1)
+			end_customer_list = true;
+	}
+	cout << "Steady State Condition:" << endl;
+	cout << "Number of customers served: " << num_customers << endl;
+	cout << "Longest line length: " << most_customers_in_line << endl;
+	cout << "Maximum length of time spent in line: " << longest_wait_time << endl;
+	cout << "Total time registers were idle: " << total_idle_time << endl;
+	tick = 0;
+	num_customers = 0;
+	customer_counter = 0;
+	most_customers_in_line = 0;
+	longest_wait_time = 0;
+	total_idle_time = 0;
+	end_customer_list = false;
+	
+	ifstream fin2;
+	fin2.open("bigtickets.txt");
+	while (!fin2.eof())
+	{
+		cin >> temp.time_arrived;
+		cin >> temp.items;
+		temp.payment_time = rand() % 4;
+		arrivals.push_back(temp);
+		num_customers++;
+	}
+	fin2.close();
+	while (end_customer_list == false)
+	{
+		for (int i = 0; i < num_customers; i++)
+		{
+			temp = arrivals[i];
+			if (temp.time_arrived == tick)
+			{
+				if (temp.items <= 10 && lanes[0].lines.size() <= 5)
+				{
+					lanes[0].lines.push_front(temp);
+					lanes[0].busy = true;
+					if (lanes[0].lines.size() > most_customers_in_line)
+						most_customers_in_line++;
+				}
+				else
+				{
+					for (int j = 1; j < 6; j++)
+					{
+						if (lanes[j].busy == false)
+						{
+							lanes[j].lines.push_front(temp);
+							lanes[j].busy = true;
+							if (lanes[j].lines.size() > most_customers_in_line)
+								most_customers_in_line++;
+						}
+					}
+					for (int j = 2; j < 6; j++)
+					{
+						if (lanes[j].lines.size() < lanes[j - 1].lines.size() && lanes[1].lines.size() > lanes[j].lines.size())
+						{
+							lanes[j].lines.push_back(temp);
+							if (lanes[j].lines.size() > most_customers_in_line)
+								most_customers_in_line++;
+						}
+						else
+						{
+							lanes[1].lines.push_back(temp);
+							if (lanes[1].lines.size() > most_customers_in_line)
 								most_customers_in_line++;
 						}
 					}
@@ -88,48 +179,42 @@ int main()
 		{
 			if (lanes[i].busy == true)
 			{
-				temp.total_time = temp.total_time - 3;
-				if (temp.total_time <= 0)
+				lanes[i].checking_out = lanes[i].lines.get_front();
+				lanes[i].checking_out.total_time = lanes[i].checking_out.total_time - 3;
+				lanes[i].checking_out.time_completed++;
+				if (lanes[i].checking_out.total_time <= 0)
 					lanes[i].lines.pop_front();
 			}
+			if (lanes[i].checking_out.time_completed > longest_wait_time)
+			{
+				longest_wait_time++;
+			}
+		}
+		for (int i = 0; i < 6; i++)
+		{
+			if (lanes[i].busy == false)
+				total_idle_time++;
 		}
 		tick++;
 		if (customer_counter == num_customers - 1)
 			end_customer_list = true;
 	}
-	cout << "Steady State Condition:" << endl;
-	cout << "Number of customers served: " << num_customers << endl;
-	cout << "Longest line length: " << most_customers_in_line << endl;
-	cout << "Average lenth of time spent in line: " << endl;
-	cout << "Maximum length of time spent in line: " << endl;
-	cout << "Total time registers were idle: " << endl;
-	tick = 0;
-	end_customer_list = false;
-	num_customers = 0;
-	customer_counter = 0;
-	
-	ifstream fin;
-	fin.open("bigtickets.txt");
-	while (!fin.eof())
-	{
-		cin >> temp.time_arrived;
-		cin >> temp.items;
-		temp.payment_time = rand() % 4;
-		arrivals.push_back(temp);
-		num_customers++;
-	}
-	fin.close();
 	cout << "Big Tickets Condition:" << endl;
 	cout << "Number of customers served: " << num_customers << endl;
 	cout << "Longest line length: " << most_customers_in_line << endl;
-	cout << "Average lenth of time spent in line: " << endl;
-	cout << "Maximum length of time spent in line: " << endl;
-	cout << "Total time registers were idle: " << endl;
+	cout << "Maximum length of time spent in line: " << longest_wait_time << endl;
+	cout << "Total time registers were idle: " << total_idle_time << endl;
+	tick = 0;
+	num_customers = 0;
+	customer_counter = 0;
+	most_customers_in_line = 0;
+	longest_wait_time = 0;
+	total_idle_time = 0;
+	end_customer_list = false;
 	
-	
-	ifstream fin;
-	fin.open("bigcrunch.txt");
-	while (!fin.eof())
+	ifstream fin3;
+	fin3.open("bigcrunch.txt");
+	while (!fin3.eof())
 	{
 		cin >> temp.time_arrived;
 		cin >> temp.items;
@@ -137,13 +222,88 @@ int main()
 		arrivals.push_back(temp);
 		num_customers++;
 	}
-	fin.close();
+	fin3.close();
+	while (end_customer_list == false)
+	{
+		for (int i = 0; i < num_customers; i++)
+		{
+			temp = arrivals[i];
+			if (temp.time_arrived == tick)
+			{
+				if (temp.items <= 10 && lanes[0].lines.size() <= 5)
+				{
+					lanes[0].lines.push_front(temp);
+					lanes[0].busy = true;
+					if (lanes[0].lines.size() > most_customers_in_line)
+						most_customers_in_line++;
+				}
+				else
+				{
+					for (int j = 1; j < 6; j++)
+					{
+						if (lanes[j].busy == false)
+						{
+							lanes[j].lines.push_front(temp);
+							lanes[j].busy = true;
+							if (lanes[j].lines.size() > most_customers_in_line)
+								most_customers_in_line++;
+						}
+					}
+					for (int j = 2; j < 6; j++)
+					{
+						if (lanes[j].lines.size() < lanes[j - 1].lines.size() && lanes[1].lines.size() > lanes[j].lines.size())
+						{
+							lanes[j].lines.push_back(temp);
+							if (lanes[j].lines.size() > most_customers_in_line)
+								most_customers_in_line++;
+						}
+						else
+						{
+							lanes[1].lines.push_back(temp);
+							if (lanes[1].lines.size() > most_customers_in_line)
+								most_customers_in_line++;
+						}
+					}
+				}
+			}
+			customer_counter++;
+		}
+		for (int i = 0; i < 6; i++)
+		{
+			if (lanes[i].busy == true)
+			{
+				lanes[i].checking_out = lanes[i].lines.get_front();
+				lanes[i].checking_out.total_time = lanes[i].checking_out.total_time - 3;
+				lanes[i].checking_out.time_completed++;
+				if (lanes[i].checking_out.total_time <= 0)
+					lanes[i].lines.pop_front();
+			}
+			if (lanes[i].checking_out.time_completed > longest_wait_time)
+			{
+				longest_wait_time++;
+			}
+		}
+		for (int i = 0; i < 6; i++)
+		{
+			if (lanes[i].busy == false)
+				total_idle_time++;
+		}
+		tick++;
+		if (customer_counter == num_customers - 1)
+			end_customer_list = true;
+	}
 	cout << "Big Crunch Condition:" << endl;
 	cout << "Number of customers served: " << num_customers << endl;
 	cout << "Longest line length: " << most_customers_in_line << endl;
-	cout << "Average lenth of time spent in line: " << endl;
-	cout << "Maximum length of time spent in line: " << endl;
-	cout << "Total time registers were idle: " << endl;
+	cout << "Maximum length of time spent in line: " << longest_wait_time << endl;
+	cout << "Total time registers were idle: " << total_idle_time << endl;
+	tick = 0;
+	num_customers = 0;
+	customer_counter = 0;
+	most_customers_in_line = 0;
+	longest_wait_time = 0;
+	total_idle_time = 0;
+	end_customer_list = false;
 
 	system("pause");
     return 0;
@@ -299,7 +459,7 @@ T List<T>::pop_front()
 {
 	if (front == nullptr)//checks for empty list
 	{
-		throw ListException<T>("Empty List");
+		//throw ListException<T>("Empty List");
 	}
 	else if (size() == 1)//deals with the case where there is only one item
 	{
@@ -338,4 +498,9 @@ bool List<T>::is_empty()
 		return true;
 	else
 		return false;
+}
+template <class T>
+T List<T>::get_front()
+{
+	return front->data;
 }
